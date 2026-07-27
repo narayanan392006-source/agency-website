@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://YOUR-RENDER-BACKEND-URL.onrender.com"; // replace this after backend deploy
+const API_BASE_URL = "https://agency-website-t4j8.onrender.com"; // replace this after backend deploy
 
 const form = document.getElementById("contact-form");
 const statusEl = document.getElementById("form-status");
