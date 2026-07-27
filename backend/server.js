@@ -14,10 +14,13 @@ app.get("/api/health", (req, res) => {
 
 app.post("/api/contact", (req, res) => {
   const { name, email, message } = req.body || {};
+
   if (!name || !email || !message) {
     return res.status(400).json({ message: "All fields are required" });
   }
-  console.log("Contact:", { name, email, message });
+
+  console.log("Contact Form Data:", { name, email, message });
+
   return res.status(200).json({ message: "Message received ✅" });
 });
 
