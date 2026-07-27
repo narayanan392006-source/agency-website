@@ -1,19 +1,23 @@
-const API_BASE_URL = "https://agency-website-t4j8.onrender.com"; // replace this after backend deploy
+const API_BASE_URL = "https://agency-website-t4j8.onrender.com";
 
-const form = document.getElementById("contact-form");
-const statusEl = document.getElementById("form-status");
+const form = document.getElementById("projectForm");
+const statusEl = document.getElementById("formMessage");
 
 if (form) {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    // adjust field names if needed
     const payload = {
-      name: form.name.value.trim(),
-      email: form.email.value.trim(),
-      message: form.message.value.trim(),
+      name: (form.querySelector('[name="name"]')?.value || "").trim(),
+      email: (form.querySelector('[name="email"]')?.value || "").trim(),
+      message: (form.querySelector('[name="message"]')?.value || "").trim(),
     };
 
-    statusEl.textContent = "Sending...";
+    if (statusEl) {
+      statusEl.style.display = "block";
+      statusEl.textContent = "Sending...";
+    }
 
     try {
       const res = await fetch(`${API_BASE_URL}/api/contact`, {
@@ -23,13 +27,12 @@ if (form) {
       });
 
       const data = await res.json();
+      if (!res.ok) throw new Error(data.message || "Failed");
 
-      if (!res.ok) throw new Error(data.message || "Failed to send");
-
-      statusEl.textContent = "Message sent ✅";
+      if (statusEl) statusEl.textContent = "Message sent ✅";
       form.reset();
     } catch (err) {
-      statusEl.textContent = err.message || "Error ❌";
+      if (statusEl) statusEl.textContent = "Error: " + (err.message || "Failed ❌");
     }
   });
 }
