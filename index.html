@@ -1148,20 +1148,6 @@
     // Footer year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Frontend form demo (no backend)
-    const form = document.getElementById('projectForm');
-    const message = document.getElementById('formMessage');
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
-      message.style.display = 'block';
-      form.reset();
-      setTimeout(() => message.style.display = 'none', 4200);
-    });
 </script>
 <script src="script.js?v=3"></script>
 </body>
